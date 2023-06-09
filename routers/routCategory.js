@@ -25,11 +25,11 @@ router.get('/List', async (req, res) => {
 
 router.get('/Edit', async (req, res) => {
     let item_data = await catModel.findById(req.query.id);
-    res.render("CategoryAdd", {pageTitle: "Edit Category", data: item_data});
+    res.render("CategoryAdd", {pageTitle: "Edit Category", item: item_data});
 });
 
 router.post('/Edit',async (req, res) => {
-    const modelData = {categName:req.body.categoryName};
+    const modelData = {categoryName:req.body.categoryName};
     let item_data = await catModel.findByIdAndUpdate(req.query.id, modelData);
     res.redirect("/R/List");
 });
