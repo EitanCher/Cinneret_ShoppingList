@@ -14,7 +14,8 @@ router.post('/Add',(req, res) => {
         categoryName: req.body.categoryName
     }); 
     modelData.save();
-    res.send('Saved ');
+    res.redirect("/R/List");
+    //res.send('Saved ');
 });
 
 router.get('/List', async (req, res) => {
@@ -27,10 +28,8 @@ router.get('/Edit', async (req, res) => {
     res.render("CategoryAdd", {pageTitle: "Edit Category", data: item_data});
 });
 
-router.post('/Edit', async (req, res) => {
-    const modelData = {
-        category:  req.body.categoryName
-    };
+router.post('/Edit',async (req, res) => {
+    const modelData = {categName:req.body.categoryName};
     let item_data = await catModel.findByIdAndUpdate(req.query.id, modelData);
     res.redirect("/R/List");
 });
